@@ -23,7 +23,7 @@ class passwords::no_gshadow {
 # only matches double exclamation points. So that the check will succeed, we
 # set everything to double exclamation points.
     case $::osfamily {
-        RedHat: {
+        'RedHat': {
             augeas { 'disable_gshadow_passwords':
                 context => '/files/etc/gshadow',
                 changes => [
@@ -33,6 +33,6 @@ class passwords::no_gshadow {
 		lens => 'Gshadow.lns',
             }
         }
-        default: { unimplemented() }
+        default: { fail "unimplemented on ${::osfamily}" }
     }
 }

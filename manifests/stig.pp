@@ -22,9 +22,6 @@
 class passwords::stig {
 
 # The way to do these things properly varies by platform.
-    case $osfamily {
-        'RedHat': { include passwords::stig::redhat }
-        'Darwin': { include passwords::stig::darwin }
-        default: { unimplemented() }
-    }
+    $lower_osfamily = downcase($::osfamily)
+    include "${name}::${lower_osfamily}"
 }
